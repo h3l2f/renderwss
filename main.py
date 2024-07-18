@@ -34,13 +34,16 @@ def verify(ws):
         "code":""
     }
     code = (ws.receive()).replace(" ","")
-    if code.count("|") != 1: ws.send("Format: password|file_name")
+    if code.count("|") > 1: ws.send("Format: password (|Optional: file_name)")
     else:
         code = code.split("|")
         passwd = code[0]
-        filename = code[1]
+        filename = code[1] if len(code) == 2 else ""
         resp = requests.get(f"https://scamff.pythonanywhere.com/pass/{passwd}")
         if resp.text == "ok":
+            if len(code) == 1:
+                payload["status"] == "ok"
+                return ws.send(str(payload))
             resp = requests.get(f"https://scamff.pythonanywhere.com/file/{filename}")
             if '{"error"' not in resp.text:
                 payload["status"] = "ok"
