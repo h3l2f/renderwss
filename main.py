@@ -43,7 +43,7 @@ def verify(ws):
         if resp.text == "ok":
             if len(code) == 1:
                 payload["status"] == "ok"
-                return ws.send(str)
+                return ws.send(str(payload))
             resp = requests.get(f"https://scamff.pythonanywhere.com/file/{filename}")
             if '{"error"' not in resp.text:
                 payload["status"] = "ok"
