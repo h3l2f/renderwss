@@ -29,29 +29,30 @@ def gfile(name):
 
 @sock.route("/verify")
 def verify(ws):
-    payload = {
-        "status":"",
-        "code":""
-    }
-    code = (ws.receive()).replace(" ","")
-    if code.count("|") != 1: ws.send("Format: password|file_name")
-    else:
-        code = code.split("|")
-        passwd = code[0]
-        filename = code[1]
-        resp = requests.get(f"https://scamff.pythonanywhere.com/pass/{passwd}")
-        if resp.text == "ok":
-            resp = requests.get(f"https://scamff.pythonanywhere.com/file/{filename}")
-            if '{"error"' not in resp.text:
-                payload["status"] = "ok"
-                payload["code"] = resp.text
-                ws.send(str(payload))
-            else:
-                payload["status"] = "nf"
-                ws.send(str(payload))
+    for i in range(1):
+        payload = {
+            "status":"",
+            "code":""
+        }
+        code = (ws.receive()).replace(" ","")
+        if code.count("|") != 1: ws.send("Format: password|file_name")
         else:
-            payload["status"] = "err"
-            ws.send(str(payload))
+            code = code.split("|")
+            passwd = code[0]
+            filename = code[1]
+            resp = requests.get(f"https://scamff.pythonanywhere.com/pass/{passwd}")
+            if resp.text == "ok":
+                resp = requests.get(f"https://scamff.pythonanywhere.com/file/{filename}")
+                if '{"error"' not in resp.text:
+                    payload["status"] = "ok"
+                    payload["code"] = resp.text
+                    ws.send(str(payload))
+                else:
+                    payload["status"] = "nf"
+                    ws.send(str(payload))
+            else:
+                payload["status"] = "err"
+                ws.send(str(payload))
     
 
 if __name__ == "__main__":
