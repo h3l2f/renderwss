@@ -19,7 +19,7 @@ def funct(code):
 
 @app.route("/add-pass/<code>")
 def add_pass(code):
-    resp = requests.get(f"https://scamff.pythonanywhere.com/add-pass/{code}")
+    resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     return resp.text
 
 @app.route('/file/<name>')
