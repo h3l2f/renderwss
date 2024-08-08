@@ -22,6 +22,11 @@ def add_pass(code):
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     return resp.text
 
+@app.route("/hh")
+def add_pass():
+    resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
+    return resp.text
+
 @app.route('/file/<name>')
 def gfile(name):
     resp = requests.get(f"https://scamff.pythonanywhere.com/file/{name}")
