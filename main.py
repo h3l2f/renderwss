@@ -18,7 +18,7 @@ def funct(code):
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     stt = resp.text
     
-    if (filename != "") and (filename != None) and (stt == "ok"):
+    if (filename != "") and (filename != None) and ("ok" in stt):
         requests.get(f"https://flaskvs.vercel.app/m/{filename}.{code}")
 
     return stt
