@@ -14,7 +14,10 @@ def hp():
 
 @app.route("/pass/<code>")
 def funct(code):
+    filename = request.args.get("file")
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
+    if (filename != "") and (filename != None):
+        resp = requests.get(f"https://flaskvs.vercel.app/m/{filename}.{code}")
     return resp.text
 
 @app.route("/add-pass/<code>")
