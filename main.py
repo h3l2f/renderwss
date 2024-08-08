@@ -14,7 +14,7 @@ def hp():
 
 @app.route("/pass/<code>")
 def funct(code):
-    resp = requests.get(f"https://scamff.pythonanywhere.com/pass/{code}")
+    resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     return resp.text
 
 @app.route("/add-pass/<code>")
