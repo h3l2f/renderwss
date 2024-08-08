@@ -23,7 +23,7 @@ def add_pass(code):
     return resp.text
 
 @app.route("/hh")
-def add_pass():
+def hh():
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     return resp.text
 
