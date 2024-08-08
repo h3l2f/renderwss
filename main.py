@@ -25,7 +25,7 @@ def funct(code):
 
 @app.route("/ping/<code>")
 def _ping(code):
-    resp = requests.get(f"https://scamff.pythonanywhere.com/ping/{code}")
+    resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     return resp.text
 
 @app.route("/add-pass/<code>")
