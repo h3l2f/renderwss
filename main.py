@@ -43,8 +43,13 @@ def hh():
 @app.route('/file/<name>')
 def gfile(name):
     resp = requests.get(f"https://scamff.pythonanywhere.com/file/{name}")
+    nl = name.split(".")
+    imgl = ["png","jpg","jpeg","gif"]
+
+    if nl[len(nl)-1] not in imgl: return resp.text
+    
     flo = io.BytesIO(resp.content)
-    return send_file(flo)
+    return send_file(flo, mimetype=f"image/{nl[len(nl)-1]}")
 
 @sock.route("/verify")
 def verify(ws):
