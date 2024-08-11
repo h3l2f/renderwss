@@ -3,6 +3,7 @@ import requests
 from flask_cors import CORS
 from flask_sock import Sock
 import json
+import io
 
 app = Flask(__name__)
 sock = Sock(app)
@@ -42,7 +43,8 @@ def hh():
 @app.route('/file/<name>')
 def gfile(name):
     resp = requests.get(f"https://scamff.pythonanywhere.com/file/{name}")
-    return resp.text
+    flo = io.BytesIO(resp.content)
+    return send_file(flo)
 
 @sock.route("/verify")
 def verify(ws):
