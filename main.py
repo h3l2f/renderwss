@@ -30,6 +30,16 @@ def _ping(code):
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
     return resp.text
 
+@app.route("/banip/<ip>")
+def _bip(ip):
+    resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
+    return resp.text
+
+@app.route("/del/<code>")
+def _del(code):
+    resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
+    return resp.text
+
 @app.route("/add-pass/<code>")
 def add_pass(code):
     resp = requests.get(f"https://scamff.pythonanywhere.com{request.full_path}")
